@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Android8.0之上的版本都默认使用Https访问了，需要要允许Http访问的话，需要进行一次配置-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>
