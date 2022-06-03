@@ -1,6 +1,7 @@
 package com.mediading.stealthystriver.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -78,5 +79,16 @@ public class BaseFragment extends Fragment {
             loadingDialog.dismiss();
         }
     }
+
+    protected void jump2ActivityFinish(final Class<?> clazz){
+        startActivity(new Intent(context,clazz));
+        //Finishes the associated activity
+        getActivity().finish();
+    }
+
+    protected void jump2Activity(final Class<?> clazz){
+        startActivity(new Intent(context,clazz));
+    }
+
 
 }
