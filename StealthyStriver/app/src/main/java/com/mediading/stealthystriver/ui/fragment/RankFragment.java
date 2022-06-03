@@ -4,6 +4,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
@@ -35,10 +36,17 @@ public class RankFragment extends BaseFragment {
     private CountDownTimer countDownTimer;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // 创建viewmodel
+        rankFragmentViewModel = new ViewModelProvider(this).get(RankFragmentViewModel.class);
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         dataBinding = DataBindingUtil.inflate(inflater,R.layout.rank_fragment,container,false);
-        rankFragmentViewModel = new ViewModelProvider(this).get(RankFragmentViewModel.class);
         dataBinding.setFocus(rankFragmentViewModel);
         return dataBinding.getRoot();
     }
@@ -46,7 +54,6 @@ public class RankFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         dataBinding.timeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -63,17 +70,24 @@ public class RankFragment extends BaseFragment {
 
             }
         });
-
         initView();
     }
 
     private void initView(){
+
         dataBinding.startButton.setOnClickListener(this::startClock);
 
         rankFragmentViewModel.getDataStatus().observe(getViewLifecycleOwner(), new Observer<BaseViewModel.DataStatus>() {
             @Override
             public void onChanged(BaseViewModel.DataStatus dataStatus) {
                 toastShort(dataStatus.getMsg());
+            }
+        });
+
+        rankFragmentViewModel.getFocusTimeLeft().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                toastLong(s);
             }
         });
 
@@ -88,6 +102,7 @@ public class RankFragment extends BaseFragment {
 
     public void resetTimer(){
         rankFragmentViewModel.setFocusProgress(rankFragmentViewModel.defaultFocusProgress);
+        rankFragmentViewModel.saveCurrentFocusTime();
         countDownTimer.cancel();
         dataBinding.startButton.setText("START");
         dataBinding.timeBar.setEnabled(true);
@@ -119,4 +134,10 @@ public class RankFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        rankFragmentViewModel.saveCurrentFocusTime();
+        Log.i(TAG,"on Destory() sssssssssssssssssssss");
+    }
 }

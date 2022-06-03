@@ -39,7 +39,7 @@ public class MainFragmentViewModel extends BaseViewModel {
     public void setFakeTodoList(){
         List<Todo> todoList = new ArrayList<>();
         for (int i=0;i<30;i++){
-            Todo todoItem = new Todo(i,"item"+i,"fake item",new Date(),false);
+            Todo todoItem = new Todo(i,"item"+i,"fake item",new Date().toString(),false);
             todoList.add(todoItem);
         }
         this.todoList = new MutableLiveData<>();

@@ -16,21 +16,28 @@ public class RankFragmentViewModel extends BaseViewModel {
     private MutableLiveData<Integer> focusProgress = new MutableLiveData<>();
     private MutableLiveData<Integer> focusMax = new MutableLiveData<>();
     private FocusRepository focusRepository;
+    private MutableLiveData<String> focusTimeLeft = new MutableLiveData<>();
+
 
     public final int defaultMax = 3600;
     public final int defaultFocusProgress = 1500;
     private LiveData<String> focusTime = Transformations.switchMap(focusProgress, new Function<Integer, LiveData<String>>() {
         @Override
         public LiveData<String> apply(Integer input) {
-            LiveData<String> tmp1 = focusRepository.getFocusTime(input);
-            LiveData<String> tmp2 = focusRepository.getFocusTime(input);
-            String test = tmp1.hashCode()==tmp2.hashCode()?"true":"false";
-            Log.i(TAG,"....................."+test);
-            Log.i(TAG,"....................."+focusRepository.getFocusTime(input).getValue());
-            return focusRepository.getFocusTime(input);
+            return focusRepository.reflashFocusTime(input);
         }
     });
 
+    public MutableLiveData<String> getFocusTimeLeft(){
+        Integer time = focusRepository.getProgressLeft().getValue();
+        if(time!=null)
+            if(time!=0){
+                int minute = time/60;
+                int sec = time-minute*60;
+                focusTimeLeft.postValue("您上次还剩余"+minute+"分"+sec+"秒 就完成设定的任务啦");
+        }
+        return focusTimeLeft;
+    }
 
     public void setFocusProgress(Integer focusProgress) {
         this.focusProgress.setValue(focusProgress);
@@ -46,7 +53,7 @@ public class RankFragmentViewModel extends BaseViewModel {
 
     @Override
     protected void initDataStatus() {
-        dataStatus.postValue(new DataStatus("专注~",""));
+        getDataStatus().postValue(new DataStatus("专注~",""));
     }
 
     @Inject
@@ -64,6 +71,10 @@ public class RankFragmentViewModel extends BaseViewModel {
 
     public MutableLiveData<Integer> getFocusProgress() {
         return focusProgress;
+    }
+
+    public void saveCurrentFocusTime(){
+        focusRepository.saveFocusTime();
     }
 
 }

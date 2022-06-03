@@ -2,6 +2,7 @@ package com.mediading.stealthystriver.repository;
 
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.mediading.stealthystriver.StealthyStriverApplication;
 import com.mediading.stealthystriver.db.dao.TodoDAO;
@@ -22,11 +23,13 @@ public class TodoRepository {
 
     @Inject
     TodoRepository() {
+        Log.i(TAG,"TodoRepo init ");
         todoDao = StealthyStriverApplication.getLocalDB().todoDAO();
         allTodos = getAllTodos();
     }
 
     public void insert(Todo todo){
+        Log.i(TAG,"insert "+ todo.toString());
         new AsyncInsertTodo(this.todoDao).execute(todo);
     }
 

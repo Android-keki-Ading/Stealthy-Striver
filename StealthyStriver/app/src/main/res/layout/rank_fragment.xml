@@ -9,7 +9,7 @@
             type="com.mediading.stealthystriver.viewmodel.RankFragmentViewModel"/>
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.fragment.RankFragment"
@@ -17,46 +17,34 @@
 
         <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/timeBar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
             android:layout_alignParentTop="true"
             android:layout_margin="15dp"
-            android:layout_marginStart="14dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="14dp"
-            android:layout_marginRight="14dp"
             android:max="@{focus.focusMax}"
-            android:progress="@{focus.focusProgress}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:progress="@{focus.focusProgress}"/>
 
 
         <TextView
             android:id="@+id/timerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:text="@{focus.focusTime}"
+            android:textColor="@color/white"
             android:textSize="70sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.561"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_centerInParent="true"/>
 
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/startButton"
+            android:layout_marginTop="39dp"
+            android:layout_below="@+id/timerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:layout_marginEnd="100dp"
+            android:layout_centerHorizontal="true"
             android:paddingHorizontal="80dp"
             android:onClick="startClock"
-            android:text="Start"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:text="Start" />
+    </RelativeLayout>
 </layout>

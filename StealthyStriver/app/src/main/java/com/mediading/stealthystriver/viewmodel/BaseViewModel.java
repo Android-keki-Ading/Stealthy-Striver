@@ -19,11 +19,17 @@ public abstract class BaseViewModel extends ViewModel {
     public String TAG;
 
     private void setTAG(){
-        Log.i("BaseViewModel","--> init tag"+this.getClass().getSimpleName());
+        Log.i("BaseViewModel","--> init tag "+this.getClass().getSimpleName());
         TAG = this.getClass().getSimpleName();
     }
 
     public MutableLiveData<DataStatus> getDataStatus() {
+        if(dataStatus==null){
+            dataStatus = new MutableLiveData<>();
+            Log.i(TAG," a new dataStatus");
+        }
+        Log.i(TAG,"return  new dataStatus");
+
         return dataStatus;
     }
 
@@ -33,7 +39,7 @@ public abstract class BaseViewModel extends ViewModel {
      * 让view层观察status的变化
      * （为了方便在viewModel层完成一些逻辑判断（比如checkUser, 用户的输入是否和本地库的user匹配）
      */
-    public MutableLiveData<DataStatus> dataStatus = new MutableLiveData<>();
+    public MutableLiveData<DataStatus> dataStatus;
 
     /**
      * 初始化数据初始状态
@@ -41,13 +47,19 @@ public abstract class BaseViewModel extends ViewModel {
     protected abstract void initDataStatus();
     BaseViewModel(){
         setTAG();
+        Log.i(TAG,"BaseViewModel-->call getDatastatus()");
+        dataStatus = getDataStatus(); // 44 45 不能对调
         initDataStatus();
     }
 
     protected void updateRegisterStatusMsg(String msg){
-        MutableLiveData<DataStatus> registerStatus =  getDataStatus();
-        registerStatus.getValue().setMsg(msg);
-        registerStatus.postValue(getDataStatus().getValue());
+        if(getDataStatus().getValue()!=null){
+            Log.i(TAG,msg);
+            getDataStatus().getValue().setMsg(msg);
+            Log.i(TAG,"updateRegisterStatusMsg-->call getDatastatus()");
+
+            getDataStatus().setValue(getDataStatus().getValue());
+        }
     }
 
     public class DataStatus{

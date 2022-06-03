@@ -7,7 +7,6 @@ import android.content.Context;
 import com.mediading.stealthystriver.db.LocalDataBase;
 import com.mediading.stealthystriver.network.ServiceCreator;
 
-import dagger.hilt.DefineComponent;
 import dagger.hilt.android.HiltAndroidApp;
 import dagger.hilt.android.internal.managers.ApplicationComponentManager;
 

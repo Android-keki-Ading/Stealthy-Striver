@@ -87,6 +87,6 @@ public class LoginViewModel extends BaseViewModel {
 
     @Override
     protected void initDataStatus() {
-        dataStatus.postValue(new DataStatus("请先登录",""));
+        super.getDataStatus().postValue(new DataStatus("请输入用户密码",""));
     }
 }

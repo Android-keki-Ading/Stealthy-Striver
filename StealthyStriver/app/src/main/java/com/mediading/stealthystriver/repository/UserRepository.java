@@ -5,8 +5,10 @@ import android.util.Log;
 
 import com.mediading.stealthystriver.StealthyStriverApplication;
 import com.mediading.stealthystriver.db.entity.User;
+import com.mediading.stealthystriver.model.InfoResponse;
 import com.mediading.stealthystriver.model.LoginResponse;
 import com.mediading.stealthystriver.model.RegisterResponse;
+import com.mediading.stealthystriver.model.UserInfo;
 import com.mediading.stealthystriver.model.UserLogin;
 import com.mediading.stealthystriver.model.UserRegister;
 import com.mediading.stealthystriver.network.ServiceCreator;
@@ -28,6 +30,37 @@ public class UserRepository {
     private MutableLiveData<RegisterResponse> registerResponse = new MutableLiveData<>();
     private LiveData<User> localUser;
     private final MutableLiveData<LoginResponse> loginResponse = new MutableLiveData<>();
+    private UserInfo userInfo;
+    private MutableLiveData<InfoResponse> infoResponse = new MutableLiveData<>();
+
+    public UserInfo getUserInfo() {
+        UserInfo info= new UserInfo("Ading","001","我希望能课程能得4.0 , 就是4.0的意思");
+        Log.i(TAG, "getUserInfo()");
+        // 很奇怪， postvalue不能被观察
+        return info;
+    }
+
+    public MutableLiveData<InfoResponse> getUserInfoResponse(UserLogin user) {
+        Log.i(TAG, "getUserInfoResponse() --> called");
+        ServiceCreator
+                .createService(ApiUserService.class)
+                .getUserInfo(user)
+                .enqueue(new Callback<InfoResponse>() {
+                    @Override
+                    public void onResponse(Call<InfoResponse> call, Response<InfoResponse> response) {
+                        if(response.code()==200){
+                            Log.i(TAG,"onResponse 200");
+                            infoResponse.postValue(response.body());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<InfoResponse> call, Throwable t) {
+
+                    }
+                });
+        return infoResponse;
+    }
 
     public MutableLiveData<RegisterResponse> getRegisterResponse(UserRegister userRegister) {
 
@@ -109,4 +142,6 @@ public class UserRepository {
             }
         });
     }
+
+
 }

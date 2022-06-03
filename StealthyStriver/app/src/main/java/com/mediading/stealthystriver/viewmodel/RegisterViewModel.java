@@ -103,6 +103,6 @@ public class RegisterViewModel extends BaseViewModel {
 
     @Override
     protected void initDataStatus() {
-        dataStatus.postValue(new DataStatus("欢迎注册偷博仔~",""));
+        super.getDataStatus().postValue(new DataStatus("欢迎注册偷博仔~",""));
     }
 }

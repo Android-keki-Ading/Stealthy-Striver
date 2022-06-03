@@ -14,9 +14,11 @@
         android:theme="@style/Theme.StealthyStriver"
         tools:targetApi="n">
         <activity
-            android:name=".ui.activity.TodoActivity"
+            android:name=".ui.activity.InfoActivity"
             android:exported="false" />
-        <!-- 设置启动activity的theme full screen -->
+        <activity
+            android:name=".ui.activity.TodoActivity"
+            android:exported="false" /> <!-- 设置启动activity的theme full screen -->
         <activity
             android:name=".ui.activity.ActivateActivity"
             android:exported="false"
@@ -61,11 +63,11 @@
             <!-- </intent-filter> -->
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

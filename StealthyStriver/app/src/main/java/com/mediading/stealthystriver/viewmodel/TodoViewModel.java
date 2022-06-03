@@ -10,7 +10,9 @@ import javax.inject.Inject;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import dagger.hilt.android.lifecycle.HiltViewModel;
 
+@HiltViewModel
 public class TodoViewModel extends BaseViewModel{
     private MutableLiveData<UserTodo> userTodo;
     private TodoRepository todoRepository;

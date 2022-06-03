@@ -45,9 +45,9 @@ public class Todo {
 
     //Cannot figure out how to save this field into database. You can consider adding a type converter for it
     @ColumnInfo(name ="todo_date")
-    private Date todoDate;
+    private String todoDate;
 
-    public Todo(String todoTitle, boolean completed, String todoDescription, Date todoDate) {
+    public Todo(String todoTitle, boolean completed, String todoDescription, String todoDate) {
         this.todoTitle = todoTitle;
         this.completed = completed;
         this.todoDescription = todoDescription;
@@ -55,7 +55,7 @@ public class Todo {
     }
 
     @Ignore
-    public Todo(long todo_item_id, String todoTitle, String todoDescription, Date todoDate, boolean completed) {
+    public Todo(long todo_item_id, String todoTitle, String todoDescription, String  todoDate, boolean completed) {
         this.todo_item_id = todo_item_id;
         this.todoTitle = todoTitle;
         this.todoDescription = todoDescription;
@@ -82,11 +82,11 @@ public class Todo {
 
     }
 
-    public Date getTodoDate() {
+    public String getTodoDate() {
         return todoDate;
     }
 
-    public void setTodoDate(Date todoDate) {
+    public void setTodoDate(String todoDate) {
         this.todoDate = todoDate;
 
     }
@@ -100,7 +100,15 @@ public class Todo {
         return this;
     }
 
-    public String data2String(){
-        return getTodoDate().toString();
+
+    @Override
+    public String toString() {
+        return "Todo{" +
+                "todo_item_id=" + todo_item_id +
+                ", todoTitle='" + todoTitle + '\'' +
+                ", completed=" + completed +
+                ", todoDescription='" + todoDescription + '\'' +
+                ", todoDate='" + todoDate + '\'' +
+                '}';
     }
 }
