@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.mediading.stealthystriver.StealthyStriverApplication;
 import com.mediading.stealthystriver.view.LoadingDialog;
 
 import androidx.annotation.Nullable;
@@ -118,6 +119,13 @@ public class BaseActivity extends AppCompatActivity {
         } else {
             decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         }
+    }
+
+    /**
+     * 退出应用程序
+     */
+    protected void exitTheProgram() {
+        StealthyStriverApplication.getActivityManager().finishAllActivity();
     }
 }
 

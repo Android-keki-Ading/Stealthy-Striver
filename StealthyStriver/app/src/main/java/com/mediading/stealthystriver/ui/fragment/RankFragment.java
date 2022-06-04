@@ -97,6 +97,14 @@ public class RankFragment extends BaseFragment {
                 dataBinding.timerText.setText(s);
             }
         });
+
+        rankFragmentViewModel.getFocusProgress().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                Log.i(TAG,"getFocusProgress().observe");
+//                toastShort("ddd"+integer);
+            }
+        });
     }
 
 
@@ -113,6 +121,7 @@ public class RankFragment extends BaseFragment {
         if (!active) {
             active = true;
             dataBinding.timeBar.setEnabled(false);
+            rankFragmentViewModel.getFocusProgress().setValue(dataBinding.timeBar.getProgress());
             dataBinding.startButton.setText("RESET");
             Log.i("Button", "Pressed");
             countDownTimer = new CountDownTimer(dataBinding.timeBar.getProgress() * 1000L + 100, 1000) {

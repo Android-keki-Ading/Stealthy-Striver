@@ -33,6 +33,7 @@ public class InfoViewModel extends BaseViewModel{
     public void setUserInfo(UserInfo info){
         Log.i(TAG,"setUserInfo() --> "+ info.toString());
         userInfo.setValue(info);
+        // todo: 保存个人信息到本地、后台
     }
 
 

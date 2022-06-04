@@ -58,12 +58,14 @@ public interface TodoDAO {
 
 
     /**
-     * Return todoList
+     * Return todoList that completed or not
      * @return
      */
     @Query("SELECT * FROM todo WHERE todo_completed=:todo_completed order by todo_date ASC ")
     LiveData<List<Todo>> getTodoList(boolean todo_completed);
 
+    @Query("SELECT * FROM todo order by todo_date ASC")
+    LiveData<List<Todo>> getTodoList();
 
     /**
      * retrieve an item

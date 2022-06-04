@@ -9,6 +9,7 @@ import androidx.navigation.ui.NavigationUI;
 import dagger.hilt.android.AndroidEntryPoint;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mediading.stealthystriver.R;
@@ -44,5 +45,22 @@ public class MainActivity extends BaseActivity {
         NavigationUI.setupWithNavController(dataBinding.bottomNavView, navController);
 
         dataBinding.included.fab.bringToFront();
+    }
+
+    private long timeMillis;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - timeMillis) > 2000) {
+                toastShort("再次按下退出应用程序");
+                timeMillis = System.currentTimeMillis();
+            } else {
+                exitTheProgram();
+            }
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+
     }
 }

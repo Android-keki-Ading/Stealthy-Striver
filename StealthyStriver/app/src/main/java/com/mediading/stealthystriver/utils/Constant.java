@@ -11,7 +11,15 @@ public class Constant {
      */
     public static final String IS_LOGIN = "isLogin";
 
+    /**
+     * 当前专注
+     */
     public static final String CURRENT_FOCUS = "currentFocus";
+
+    /**
+     * 总计专注
+     */
+    public static final String TOTAL_FOCUS = "totalFocus";
 
     /**
      * 注册的常量信息

@@ -1,5 +1,6 @@
 package com.mediading.stealthystriver.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -16,10 +17,19 @@ import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder> {
+
+    private OnItemClickListener listener;
+
     LiveData<List<Todo>> todoList;
 
     public TodoAdapter(LiveData<List<Todo>> todoList) {
         this.todoList = todoList;
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void setTodoList(LiveData<List<Todo>> todoList_){
+        todoList = todoList_;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -41,7 +51,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
 
     @Override
     public int getItemCount() {
-        return todoList.getValue().size();
+        if(todoList.getValue()!=null)
+            return todoList.getValue().size();
+        return 0;
     }
 
 
@@ -51,6 +63,19 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         public TodoViewHolder(TodoItemBinding dataBinding) {
             super(dataBinding.getRoot());
             todoItemBinding = dataBinding;
+            todoItemBinding.cvTodo.setOnClickListener(e->{
+                int position = getBindingAdapterPosition();
+                if(listener!=null && position!=RecyclerView.NO_POSITION){
+                    listener.onItemClick(todoList.getValue().get(position));
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Todo todo);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
     }
 }

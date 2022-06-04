@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.mediading.stealthystriver.db.LocalDataBase;
 import com.mediading.stealthystriver.network.ServiceCreator;
+import com.mediading.stealthystriver.ui.activity.ActivityManager;
 
 import dagger.hilt.android.HiltAndroidApp;
 import dagger.hilt.android.internal.managers.ApplicationComponentManager;
@@ -50,5 +51,9 @@ public class StealthyStriverApplication extends Application {
 
     public static LocalDataBase getLocalDB(){
         return db;
+    }
+
+    public static ActivityManager getActivityManager() {
+        return ActivityManager.getInstance();
     }
 }

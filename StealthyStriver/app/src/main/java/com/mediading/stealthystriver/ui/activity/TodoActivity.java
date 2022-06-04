@@ -56,6 +56,7 @@ public class TodoActivity extends BaseActivity {
             }
             Log.i(TAG,"DATA"+date);
             todoViewModel.insert(new Todo(title,false,description,date));
+            finish();
         });
 
 

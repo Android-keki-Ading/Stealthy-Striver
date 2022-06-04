@@ -25,7 +25,7 @@ public class TodoRepository {
     TodoRepository() {
         Log.i(TAG,"TodoRepo init ");
         todoDao = StealthyStriverApplication.getLocalDB().todoDAO();
-        allTodos = getAllTodos();
+        allTodos = selectAllTodo();
     }
 
     public void insert(Todo todo){
@@ -47,6 +47,10 @@ public class TodoRepository {
 
     public LiveData<List<Todo>> getAllTodos(){
         return this.allTodos;
+    }
+
+    public LiveData<List<Todo>> selectAllTodo(){
+        return todoDao.getTodoList();
     }
 
     private static class AsyncInsertTodo extends AsyncTask<Todo,Void,Void>{

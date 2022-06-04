@@ -1,6 +1,7 @@
 package com.mediading.stealthystriver.ui.fragment;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -39,13 +40,14 @@ public class HomeFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         dataBinding = DataBindingUtil.inflate(inflater,R.layout.home_fragment,container,false);
+        homeFragmentViewModel = new ViewModelProvider(this).get(HomeFragmentViewModel.class);
+        dataBinding.setTotalFocus(homeFragmentViewModel);
         return dataBinding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        homeFragmentViewModel = new ViewModelProvider(this).get(HomeFragmentViewModel.class);
         initView();
     }
 
@@ -62,6 +64,13 @@ public class HomeFragment extends BaseFragment {
 
         dataBinding.cvAvatar.setOnClickListener(e->{
             jump2Activity(InfoActivity.class);
+        });
+
+        homeFragmentViewModel.getFocusTotal().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                dataBinding.tvTotalFocusMinute.setText(s);
+            }
         });
     }
 
