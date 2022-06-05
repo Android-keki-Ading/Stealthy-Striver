@@ -33,7 +33,7 @@ public class FocusRepository {
         mvUtils = entryPoint.getMVUtils();
         this.focusTime.setValue("25:00");
         progressLeft.setValue(mvUtils.getInt(Constant.CURRENT_FOCUS));
-            progressTotal.setValue(mvUtils.getInt(Constant.TOTAL_FOCUS));
+        progressTotal.setValue(mvUtils.getInt(Constant.TOTAL_FOCUS));
     }
 
     public void setFocusProgress(Integer progress) {
@@ -90,7 +90,7 @@ public class FocusRepository {
     }
 
     public MutableLiveData<String> getFocusTotal(){
-        Integer secs = getProgressTotal().getValue();
+        Integer secs = mvUtils.getInt(Constant.TOTAL_FOCUS);
         int minutes = secs / 60;
         Log.i(TAG,""+secs);
         this.focusTotal.setValue(minutes+"分钟");
