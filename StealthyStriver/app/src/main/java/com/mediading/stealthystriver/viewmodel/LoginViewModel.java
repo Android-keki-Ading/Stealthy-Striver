@@ -30,7 +30,7 @@ public class LoginViewModel extends BaseViewModel {
     LoginViewModel(UserRepository userRepository) {
         super();
         this.userRepository = userRepository;
-        userLogin.setValue(new UserLogin("test@test.com",""));
+        userLogin.setValue(new UserLogin("",""));
     }
 
     public MutableLiveData<UserLogin> getUserLogin() {
