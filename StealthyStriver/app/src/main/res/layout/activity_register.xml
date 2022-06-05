@@ -42,30 +42,25 @@
             android:textStyle="bold"
             android:textAlignment="center"
             android:textSize="20sp"
-            android:layout_marginBottom="28dp"
             android:padding="5dp"
-            android:layout_marginTop="300dp" />
+            android:layout_marginTop="250dp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="28dp"
-            app:cardCornerRadius="23dp"
+            app:cardCornerRadius="10dp"
             app:strokeColor="@color/cardview_shadow_end_color"
             app:strokeWidth="2dp">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="32dp">
-
-
-
+                android:padding="13dp">
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/et_account_lay"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_account"
                             android:layout_width="match_parent"
@@ -91,7 +86,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/et_account_lay"
-                        android:layout_marginTop="12dp">
+                        android:layout_marginTop="8dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_pwd"
@@ -108,7 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/et_pwd_lay"
-                        android:layout_marginTop="12dp">
+                        android:layout_marginTop="8dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_confirm_pwd"
@@ -169,6 +164,6 @@
             android:layout_gravity="center_horizontal"
             android:textAlignment="center"
             android:text="@string/tv_register_hint"
-            android:layout_marginVertical="20dp"/>
+            android:layout_marginVertical="10dp"/>
     </LinearLayout>
 </layout>
