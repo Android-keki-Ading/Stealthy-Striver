@@ -39,6 +39,7 @@ public class RegisterActivity extends BaseActivity {
     private void initView(){
 
         registerViewModel.getDataStatus().observe(this, registerStatus->{
+            dissmissLoading();
             toastShort(registerStatus.getMsg());
         });
 
@@ -46,13 +47,18 @@ public class RegisterActivity extends BaseActivity {
         registerViewModel.getRegisterResponse().observe(this, new Observer<RegisterResponse>() {
             @Override
             public void onChanged(RegisterResponse registerResponse) {
-                Log.i(TAG,registerResponse.getMsg());
+                Log.i(TAG,"getRegisterResponse().observe"+registerResponse.getMsg());
                 toastShort(registerResponse.getMsg());
                 registerViewModel.saveUser();
+                if(registerResponse.getMsg().equals("注册成功！")){
+                    Log.i(TAG,""+registerResponse.getMsg()+ "跳转登录...");
+                    jump2ActivityFinish(LoginActivity.class);
+                }
             }
         });
 
         dataBinding.btnRegister.setOnClickListener(e->{
+            showLoading();
             // 点击注册, 将视图绑定到userRegister的对象，放入(注册）MutableLiveData<UserRegister>
             // 由此触发Transformations.switchMap()返回LiveData<RegisterResponse>
 
@@ -62,12 +68,9 @@ public class RegisterActivity extends BaseActivity {
 //            registerViewModel.getDataStatus().observe(this, registerStatus->{
 //                toastShort(registerStatus.getMsg());
 //            });
-            Log.i(TAG,registerViewModel.getUserRegister().getValue().getEMail());
-            Log.i(TAG,registerViewModel.getDataStatus().getValue().getMsg());
+//            Log.i(TAG,registerViewModel.getUserRegister().getValue().getEMail());
+//            Log.i(TAG,registerViewModel.getDataStatus().getValue().getMsg());
         });
-
-
-
 
     }
 }

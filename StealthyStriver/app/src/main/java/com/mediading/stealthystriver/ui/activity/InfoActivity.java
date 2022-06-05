@@ -19,8 +19,10 @@ import android.widget.TextView;
 
 import com.mediading.stealthystriver.R;
 import com.mediading.stealthystriver.databinding.ActivityInfoBinding;
+import com.mediading.stealthystriver.model.InfoResponse;
 import com.mediading.stealthystriver.model.UserInfo;
 import com.mediading.stealthystriver.utils.APKVersionInfoUtils;
+import com.mediading.stealthystriver.utils.Num2GenderUtils;
 import com.mediading.stealthystriver.viewmodel.InfoViewModel;
 
 @AndroidEntryPoint
@@ -41,8 +43,8 @@ public class InfoActivity extends BaseActivity {
 
     private void initView(){
 
-        dataBinding.tvId.setOnClickListener(e->{
-            toastShort("id 是不能修改的哦");
+        dataBinding.tvEmail.setOnClickListener(e->{
+            toastShort("邮箱暂时不能修改的哦");
         });
 
         dataBinding.tvName.setOnClickListener(e->{
@@ -58,9 +60,21 @@ public class InfoActivity extends BaseActivity {
             showInputDialog(dataBinding.tvPersonSex);
         });
 
+        // version 要通过 context获取, 这个version数据不能被viewmodel持有了 （或者有别的办法让viewmodel持有？）
         dataBinding.tvVersion.setText(APKVersionInfoUtils.getVerName(context));
+
         dataBinding.tvCode.setOnClickListener(v -> jumpUrl(GITHUB_ADDR));
 
+        infoViewModel.getInfoResponse().observe(this, new Observer<InfoResponse>() {
+            @Override
+            public void onChanged(InfoResponse infoResponse) {
+                dataBinding.tvPersonEmailShow.setText(infoResponse.getEmail());
+                dataBinding.tvPersonNameShow.setText(infoResponse.getNickName());
+                dataBinding.tvPersonSexShow.setText(Num2GenderUtils.parseGender(infoResponse.getSex()));
+                dataBinding.tvPersonSignShow.setText(infoResponse.getSign());
+                infoViewModel.updateUserInfo();
+            }
+        });
     }
 
     /**
@@ -87,25 +101,29 @@ public class InfoActivity extends BaseActivity {
                 @SuppressLint("NonConstantResourceId")
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    UserInfo userInfo = infoViewModel.getUserInfo().getValue();
+                    InfoResponse infoResponse = infoViewModel.getInfoResponse().getValue();
                     String change = editText.getText().toString();
-                    Log.i(TAG," before "+userInfo.toString());
+                    Log.i(TAG," before "+infoResponse.toString());
                     switch (tv.getId()){
                         case R.id.tv_person_name:
-                            userInfo.setNickName(change);
-                            dataBinding.tvPersonNameShow.setText(change);
+                            infoResponse.setNickName(change);
+                            dataBinding.tvPersonNameShow.setText(change+"");
                             break;
                         case R.id.tv_person_sex:
-                            userInfo.setSex(change);
+                            if(change.equals("男"))
+                                infoResponse.setSex((byte)1);
+                            if(change.equals("女"))
+                                infoResponse.setSex((byte)2);
+                            else
+                                infoResponse.setSex((byte)0);
                             dataBinding.tvPersonSexShow.setText(change);
                             break;
                         case R.id.tv_person_sign:
-                            userInfo.setSign(change);
+                            infoResponse.setSign(change);
                             dataBinding.tvPersonSignShow.setText(change);
                             break;
                     }
-                    infoViewModel.setUserInfo(userInfo);
-//                    infoViewModel.refleshInfo();
+                    infoViewModel.getInfoResponse().setValue(infoResponse);
                 }
             });
         // create an alert dialog

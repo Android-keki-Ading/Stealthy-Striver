@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import com.mediading.stealthystriver.R;
 import com.mediading.stealthystriver.databinding.HomeFragmentBinding;
 import com.mediading.stealthystriver.databinding.HomeFragmentBindingImpl;
+import com.mediading.stealthystriver.model.InfoResponse;
 import com.mediading.stealthystriver.ui.activity.InfoActivity;
 import com.mediading.stealthystriver.ui.activity.LoginActivity;
 import com.mediading.stealthystriver.utils.Constant;
@@ -72,6 +73,15 @@ public class HomeFragment extends BaseFragment {
                 dataBinding.tvTotalFocusMinute.setText(s);
             }
         });
+
+        homeFragmentViewModel.getInfoResponse().observe(getViewLifecycleOwner(), new Observer<InfoResponse>() {
+            @Override
+            public void onChanged(InfoResponse infoResponse) {
+                dataBinding.tvPersonName.setText(infoResponse.getNickName());
+                dataBinding.tvPersonSign.setText(infoResponse.getSign());
+            }
+        });
+
     }
 
 }

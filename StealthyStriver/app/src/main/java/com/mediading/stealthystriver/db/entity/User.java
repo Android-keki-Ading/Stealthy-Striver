@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "user")
 public class User {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id", typeAffinity = ColumnInfo.INTEGER)
     private int id;
 

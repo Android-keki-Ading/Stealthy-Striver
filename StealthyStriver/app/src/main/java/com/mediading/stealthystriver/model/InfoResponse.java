@@ -3,6 +3,27 @@ package com.mediading.stealthystriver.model;
 import com.google.gson.annotations.SerializedName;
 
 public class InfoResponse {
+    @SerializedName("email")
+    private String email;
+
+    @SerializedName("nickName")
+    private String nickName;
+
+    @SerializedName("password")
+    private String password;
+
+    @SerializedName("phone")
+    private String phone;
+
+    @SerializedName("introduceSign")
+    private String sign;
+
+    @SerializedName("sex")
+    private byte sex;
+
+    @SerializedName("headImg")
+    private String headImg;
+
     public String getNickName() {
         return nickName;
     }
@@ -50,22 +71,34 @@ public class InfoResponse {
     public void setHeadImg(String headImg) {
         this.headImg = headImg;
     }
+    public String getEmail() {
+        return email;
+    }
 
-    @SerializedName("nickName")
-    private String nickName;
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    @SerializedName("password")
-    private String password;
+    public InfoResponse(String email, String nickName, String password, String phone, String sign, byte sex, String headImg) {
+        this.email = email;
+        this.nickName = nickName;
+        this.password = password;
+        this.phone = phone;
+        this.sign = sign;
+        this.sex = sex;
+        this.headImg = headImg;
+    }
 
-    @SerializedName("phone")
-    private String phone;
-
-    @SerializedName("introduceSign")
-    private String sign;
-
-    @SerializedName("sex")
-    private byte sex;
-
-    @SerializedName("headImg")
-    private String headImg;
+    @Override
+    public String toString() {
+        return "InfoResponse{" +
+                "email='" + email + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", sign='" + sign + '\'' +
+                ", sex=" + sex +
+                ", headImg='" + headImg + '\'' +
+                '}';
+    }
 }

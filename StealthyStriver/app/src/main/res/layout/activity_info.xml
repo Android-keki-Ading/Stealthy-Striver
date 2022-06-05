@@ -6,6 +6,7 @@
         <variable
             name="info"
             type="com.mediading.stealthystriver.viewmodel.InfoViewModel" />
+        <import type="com.mediading.stealthystriver.utils.Num2GenderUtils"/>
     </data>
 
     <RelativeLayout
@@ -28,8 +29,9 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
+<!--                暂时没有ID-->
                 <LinearLayout
-                    android:id="@+id/tv_id"
+                    android:id="@+id/tv_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/theme_color_secondary"
@@ -41,18 +43,20 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="SS ID"
+                        android:text="邮箱"
                         android:textColor="@color/text_color"
                         android:textSize="16sp" />
 
                     <TextView
-                        android:text="@{info.userInfo.id}"
+                        android:id="@+id/tv_person_email_show"
+                        android:text="@{info.infoResponse.email}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:textColor="@color/text_color"
+                        android:textColor="@color/bnv_check_color"
                         android:textSize="16sp"/>
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/tv_name"
@@ -74,7 +78,7 @@
 
                     <TextView
                         android:id="@+id/tv_person_name_show"
-                        android:text="@{info.userInfo.nickName}"
+                        android:text="@{info.infoResponse.nickName}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
@@ -108,7 +112,7 @@
 
                     <TextView
                         android:id="@+id/tv_person_sign_show"
-                        android:text="@{info.userInfo.sign}"
+                        android:text="@{info.infoResponse.sign}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
@@ -141,7 +145,7 @@
 
                     <TextView
                         android:id="@+id/tv_person_sex_show"
-                        android:text="@{info.userInfo.sex}"
+                        android:text="@{Num2GenderUtils.parseGender(info.infoResponse.sex)}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
@@ -153,15 +157,35 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_about"
-            android:layout_below="@+id/cv_person_info"
+        <View
+            android:id="@+id/view_split"
+            android:layout_width="match_parent"
+            android:layout_marginVertical="10dp"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/cv_person_info"
+            android:background="@color/line" />
+
+        <TextView
+            android:id="@+id/tv_split"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="10dp"
-            android:backgroundTint="#F6F6F6">
+            android:layout_below="@id/view_split"
+            android:text="@string/about"
+            android:gravity="center"
+            android:textSize="15dp"/>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_about"
+            android:layout_below="@+id/tv_split"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:cardCornerRadius="50dp"
+            android:backgroundTint="#F6F6F6">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -239,7 +263,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:text="@string/email"
+                        android:text="@{info.contactEmail}"
                         android:textColor="@color/text_color"
                         android:textSize="16sp" />
                 </LinearLayout>

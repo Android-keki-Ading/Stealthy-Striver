@@ -1,9 +1,19 @@
 package com.mediading.stealthystriver.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class UserLogin {
 
+    /**
+     * 登录名
+     */
+    @SerializedName("logName")
     private String loginName;
 
+    /**
+     * 密码
+     */
+    @SerializedName("logPassword")
     private String password;
 
     public String getLoginName() {

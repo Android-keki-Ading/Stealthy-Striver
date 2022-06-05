@@ -33,7 +33,7 @@ public class FocusRepository {
         mvUtils = entryPoint.getMVUtils();
         this.focusTime.setValue("25:00");
         progressLeft.setValue(mvUtils.getInt(Constant.CURRENT_FOCUS));
-        progressTotal.setValue(mvUtils.getInt(Constant.TOTAL_FOCUS));
+            progressTotal.setValue(mvUtils.getInt(Constant.TOTAL_FOCUS));
     }
 
     public void setFocusProgress(Integer progress) {

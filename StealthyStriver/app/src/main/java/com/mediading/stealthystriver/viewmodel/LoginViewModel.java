@@ -9,6 +9,7 @@ import com.mediading.stealthystriver.model.UserLogin;
 import com.mediading.stealthystriver.repository.UserRepository;
 import com.mediading.stealthystriver.utils.CheckUtils;
 import com.mediading.stealthystriver.utils.Constant;
+import com.mediading.stealthystriver.utils.MVUtils;
 
 import javax.inject.Inject;
 
@@ -29,7 +30,7 @@ public class LoginViewModel extends BaseViewModel {
     LoginViewModel(UserRepository userRepository) {
         super();
         this.userRepository = userRepository;
-        userLogin.setValue(new UserLogin("Ading",""));
+        userLogin.setValue(new UserLogin("test@test.com",""));
     }
 
     public MutableLiveData<UserLogin> getUserLogin() {
@@ -70,9 +71,9 @@ public class LoginViewModel extends BaseViewModel {
             updateRegisterStatusMsg(Constant.PASSWORD_NULL_MSG);
             return;
         }
+        login();
         updateRegisterStatusMsg(Constant.LOGINING);
 
-        login();
     }
 
     public void loginWithLocalUser() {

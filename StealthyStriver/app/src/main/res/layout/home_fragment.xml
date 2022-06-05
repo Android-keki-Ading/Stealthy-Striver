@@ -42,26 +42,27 @@
                     android:src="@drawable/person"/>
 
                 <TextView
+                    android:id="@+id/tv_person_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/iv_person_data_avatar"
-                    android:id="@+id/tv_person_name"
                     android:layout_marginTop="10dp"
-                    android:textStyle="bold"
-                    android:text="@string/default_person_name"
+                    android:layout_toEndOf="@+id/iv_person_data_avatar"
+                    android:text="@{totalFocus.infoResponse.nickName}"
+                    android:textColor="@color/black"
                     android:textSize="26sp"
-                    android:textColor="@color/black"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/tv_person_sign"
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="3dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/tv_person_name"
                     android:layout_below="@+id/tv_person_name"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginTop="3dp"
+                    android:text="@{totalFocus.infoResponse.sign}"
                     android:textColor="#656C9F"
-                    android:text="@string/saying"
-                    android:textSize="16sp"
-                    android:layout_alignStart="@+id/tv_person_name"/>
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"

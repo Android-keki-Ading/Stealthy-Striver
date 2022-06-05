@@ -10,13 +10,13 @@ public class UserRegister{
     /**
      * 电子邮箱
      */
-    @SerializedName("loginName")
+    @SerializedName("regName")
     private String eMail;
 
     /**
      * 密码
      */
-    @SerializedName("password")
+    @SerializedName("regPassword")
     private String password;
 
     public UserRegister(String eMail, String password) {

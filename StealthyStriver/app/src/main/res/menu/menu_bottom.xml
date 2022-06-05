@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_home"/>
     <item
         android:id="@+id/rankFragment"
-        android:title="排行榜"
+        android:title="偷博"
         android:icon="@drawable/ic_rank"/>
     <item
         android:id="@+id/messageFragment"

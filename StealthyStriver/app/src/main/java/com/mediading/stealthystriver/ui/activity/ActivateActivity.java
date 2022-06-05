@@ -37,8 +37,11 @@ public class ActivateActivity extends BaseActivity {
         EasyAnimation.appear(dataBinding.tvAppZh);
         EasyAnimation.appear(dataBinding.tvDevInfo);
 
-//        new Handler().postDelayed(() -> jump2ActivityFinish(mvUtils.getBoolean(Constant.IS_LOGIN) ? MainActivity.class : LoginActivity.class),4000);
-        new Handler().postDelayed(() -> jump2ActivityFinish(mvUtils.getBoolean(Constant.IS_LOGIN) ? LoginActivity.class : MainActivity.class),4000);
+        // 动画加载完毕,判断是否已登录
+        new Handler().postDelayed(() -> jump2ActivityFinish(mvUtils.getBoolean(Constant.IS_LOGIN) ? MainActivity.class : LoginActivity.class),4000);
+
+        // 加载完动画直接进入主页
+//        new Handler().postDelayed(() -> jump2ActivityFinish(mvUtils.getBoolean(Constant.IS_LOGIN) ? LoginActivity.class : MainActivity.class),4000);
 
 
     }

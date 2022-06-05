@@ -19,7 +19,8 @@ import dagger.hilt.android.internal.managers.ApplicationComponentManager;
 public class StealthyStriverApplication extends Application {
     public static final String TAG = StealthyStriverApplication.class.getSimpleName();
 
-    public  static final String  BASE_URL = "http://192.168.131.136:8080/";
+//    public  static final String  BASE_URL = "http://106.55.171.55:8088/";
+    public  static final String  BASE_URL = "http://192.168.249.91:8088/";
 
     public static LocalDataBase db;
 

@@ -75,10 +75,11 @@ public class RegisterViewModel extends BaseViewModel {
     }
 
     public void saveUser(){
-        if("success".equals(registerResponse.getValue().getMsg())){
+        if("注册成功！".equals(registerResponse.getValue().getMsg())){
             String email = userRegister.getValue().getEMail();
             String passwd = userRegister.getValue().getPassword();
             User user = new User(email,passwd);
+//            user.setId((int)(Math.random()*1000));
             userRepository.saveUser(user);
             Log.i(TAG,"saveUser");
         }

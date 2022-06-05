@@ -12,12 +12,12 @@ public class Constant {
     public static final String IS_LOGIN = "isLogin";
 
     /**
-     * 当前专注
+     * 当前专注,单位:秒
      */
     public static final String CURRENT_FOCUS = "currentFocus";
 
     /**
-     * 总计专注
+     * 总计专注,单位:秒
      */
     public static final String TOTAL_FOCUS = "totalFocus";
 
@@ -35,4 +35,6 @@ public class Constant {
     public static final String LOGINING = "登陆中...";
     public static final String SAVE_USER_FAILED = "注册用户未能保存本地";
     public static final String LOGIN_NAME_NULL = "登录名不能为空";
+    public static final String LOGIN_TOKEN = "token";
+    public static final String USER_EXIST = "该用户已存在";
 }
