@@ -112,7 +112,7 @@ public class InfoActivity extends BaseActivity {
                         case R.id.tv_person_sex:
                             if(change.equals("男"))
                                 infoResponse.setSex((byte)1);
-                            if(change.equals("女"))
+                            else if(change.equals("女"))
                                 infoResponse.setSex((byte)2);
                             else
                                 infoResponse.setSex((byte)0);
