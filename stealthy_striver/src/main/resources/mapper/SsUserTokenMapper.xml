@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ading_keki.stealthy_striver.mapper.SsUserTokenMapper">
+    <resultMap id="BaseResultMap" type="com.ading_keki.stealthy_striver.pojo.SsUserToken">
+        <id column="user_id" property="userId"/>
+        <result column="token" property="token"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="expire_time" property="expireTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id, token, update_time, expire_time
+    </sql>
+
+    <delete id="deleteTokenById" parameterType="int">
+        delete from ss_user_token
+        where user_id = #{userId}
+    </delete>
+
+    <insert id="insert" parameterType="SsUserToken">
+    insert into ss_user_token (user_id, token, update_time,
+      expire_time)
+    values (#{userId}, #{token}, #{updateTime}, #{expireTime})
+  </insert>
+
+    <insert id="insertSelective" parameterType="SsUserToken">
+        insert into ss_user_token
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="token != null">
+                token,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="expireTime != null">
+                expire_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="token != null">
+                #{token},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="expireTime != null">
+                #{expireTime},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectTokenById" parameterType="int" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ss_user_token
+        where user_id = #{userId}
+    </select>
+
+    <select id="selectByToken" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ss_user_token
+        where token = #{token}
+    </select>
+
+    <update id="updateByPrimaryKeySelective" parameterType="SsUserToken">
+        update ss_user_token
+        <set>
+            <if test="token != null">
+                token = #{token},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="expireTime != null">
+                expire_time = #{expireTime},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="SsUserToken">
+    update ss_user_token
+    set token = #{token},
+      update_time = #{updateTime},
+      expire_time = #{expireTime}
+    where user_id = #{userId}
+  </update>
+</mapper>

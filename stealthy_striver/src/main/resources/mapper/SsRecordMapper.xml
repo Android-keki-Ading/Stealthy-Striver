@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ading_keki.stealthy_striver.mapper.SsUserTokenMapper">
+    <delete id="deleteRecordById" parameterType="int">
+        delete from ss_record
+        where ss_user_id = #{userId}
+    </delete>
+</mapper>
